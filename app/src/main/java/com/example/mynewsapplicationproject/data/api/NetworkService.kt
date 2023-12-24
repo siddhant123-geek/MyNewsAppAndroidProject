@@ -1,5 +1,6 @@
 package com.example.mynewsapplicationproject.data.api
 
+import com.example.mynewsapplicationproject.data.model.NewsSourcesResponse
 import com.example.mynewsapplicationproject.data.model.TopHeadLineResponse
 import com.example.mynewsapplicationproject.utils.AppConstant.API_KEY
 import retrofit2.http.GET
@@ -11,4 +12,8 @@ interface NetworkService {
     @Headers("X-Api-Key: $API_KEY")
     @GET("top-headlines")
     suspend fun getTopHeadlines(@Query("country") country: String): TopHeadLineResponse
+
+    @Headers("X-Api-Key: $API_KEY")
+    @GET("top-headlines/sources")
+    suspend fun getNewsSource(): NewsSourcesResponse
 }

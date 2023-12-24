@@ -2,6 +2,7 @@ package com.example.mynewsapplicationproject.di.component
 
 import com.example.mynewsapplicationproject.di.ActivityScope
 import com.example.mynewsapplicationproject.di.module.ActivityModule
+import com.example.mynewsapplicationproject.ui.newssources.NewsSourceActivity
 import com.example.mynewsapplicationproject.ui.topheadline.TopHeadlineActivity
 import dagger.Component
 
@@ -10,5 +11,7 @@ import dagger.Component
 interface ActivityComponent {
 
     fun inject(activity: TopHeadlineActivity)
+
+    fun inject(activity: NewsSourceActivity)
 
 }
