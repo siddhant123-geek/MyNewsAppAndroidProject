@@ -6,6 +6,7 @@ import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import com.example.mynewsapplicationproject.data.model.ContentToSee
 import com.example.mynewsapplicationproject.databinding.ActivityMainBinding
+import com.example.mynewsapplicationproject.ui.countries.CountriesPageActivity
 import com.example.mynewsapplicationproject.ui.newssources.NewsSourceActivity
 import com.example.mynewsapplicationproject.ui.topheadline.TopHeadlineActivity
 
@@ -40,13 +41,15 @@ class MainActivity: AppCompatActivity() {
 
         binding.listView.setOnItemClickListener { parent, view, position, id ->
             if (position == 0) {
-                Log.d("###", "onCreate: Coming inside position = 0")
                 val intent = Intent(this, TopHeadlineActivity::class.java)
                 startActivity(intent)
             }
-            else {
-                Log.d("###", "onCreate: Coming inside else")
+            else if (position == 1) {
                 val intent = Intent(this, NewsSourceActivity::class.java)
+                startActivity(intent)
+            }
+            else if (position == 2){
+                val intent = Intent(this, CountriesPageActivity::class.java)
                 startActivity(intent)
             }
 
