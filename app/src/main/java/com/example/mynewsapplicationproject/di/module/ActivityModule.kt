@@ -8,7 +8,9 @@ import com.example.mynewsapplicationproject.data.repository.TopHeadlineRepositor
 import com.example.mynewsapplicationproject.di.ActivityContext
 import com.example.mynewsapplicationproject.ui.base.ViewModelProviderFactory
 import com.example.mynewsapplicationproject.ui.countries.CountriesPageAdapter
+import com.example.mynewsapplicationproject.ui.languages.LanguagesAdapter
 import com.example.mynewsapplicationproject.ui.newsbycountry.NewsByCountryViewModel
+import com.example.mynewsapplicationproject.ui.newsbylanguage.NewsByLanguageViewModel
 import com.example.mynewsapplicationproject.ui.newssources.NewsSourceAdapter
 import com.example.mynewsapplicationproject.ui.newssources.NewsSourceViewModel
 import com.example.mynewsapplicationproject.ui.topheadline.TopHeadlineAdapter
@@ -53,9 +55,20 @@ class ActivityModule(private val activity: AppCompatActivity) {
     }
 
     @Provides
+    fun provideNewsByLanguageViewModel(topHeadlineRepository: TopHeadlineRepository): NewsByLanguageViewModel {
+        return ViewModelProvider(activity,
+            ViewModelProviderFactory(NewsByLanguageViewModel::class) {
+                NewsByLanguageViewModel(topHeadlineRepository)
+            })[NewsByLanguageViewModel::class.java]
+    }
+
+    @Provides
     fun provideNewsSourcesAdapter() = NewsSourceAdapter(ArrayList())
 
     @Provides
     fun provideCountriesPageAdapter() = CountriesPageAdapter(ArrayList())
+
+    @Provides
+    fun provideLanguagesPageAdapter() = LanguagesAdapter(ArrayList())
 
 }
