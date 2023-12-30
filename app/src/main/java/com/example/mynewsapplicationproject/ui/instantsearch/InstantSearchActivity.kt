@@ -16,7 +16,6 @@ import com.example.mynewsapplicationproject.databinding.ActivityInstantSearchBin
 import com.example.mynewsapplicationproject.di.component.DaggerActivityComponent
 import com.example.mynewsapplicationproject.di.module.ActivityModule
 import com.example.mynewsapplicationproject.ui.base.UiState
-import com.example.mynewsapplicationproject.ui.topheadline.TopHeadlineAdapter
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -26,7 +25,7 @@ class InstantSearchActivity: AppCompatActivity() {
     lateinit var instantSearchViewModel: InstantSearchViewModel
 
     @Inject
-    lateinit var adapter: TopHeadlineAdapter
+    lateinit var adapter: InstantSearchAdapter
 
     private lateinit var binding: ActivityInstantSearchBinding
 

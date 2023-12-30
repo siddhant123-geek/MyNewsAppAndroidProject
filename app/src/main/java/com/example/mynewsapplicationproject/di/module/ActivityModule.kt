@@ -8,6 +8,7 @@ import com.example.mynewsapplicationproject.data.repository.TopHeadlineRepositor
 import com.example.mynewsapplicationproject.di.ActivityContext
 import com.example.mynewsapplicationproject.ui.base.ViewModelProviderFactory
 import com.example.mynewsapplicationproject.ui.countries.CountriesPageAdapter
+import com.example.mynewsapplicationproject.ui.instantsearch.InstantSearchAdapter
 import com.example.mynewsapplicationproject.ui.instantsearch.InstantSearchViewModel
 import com.example.mynewsapplicationproject.ui.languages.LanguagesAdapter
 import com.example.mynewsapplicationproject.ui.newsbycountry.NewsByCountryViewModel
@@ -38,6 +39,9 @@ class ActivityModule(private val activity: AppCompatActivity) {
 
     @Provides
     fun provideTopHeadlineAdapter() = TopHeadlineAdapter(ArrayList())
+
+    @Provides
+    fun provideInstantSearchAdapter() = InstantSearchAdapter(ArrayList())
 
     @Provides
     fun provideNewsSourcesViewModel(newsSourcesRepository: NewsSourcesRepository): NewsSourceViewModel {
