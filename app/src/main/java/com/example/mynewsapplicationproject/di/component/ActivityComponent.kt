@@ -3,6 +3,7 @@ package com.example.mynewsapplicationproject.di.component
 import com.example.mynewsapplicationproject.di.ActivityScope
 import com.example.mynewsapplicationproject.di.module.ActivityModule
 import com.example.mynewsapplicationproject.ui.countries.CountriesPageActivity
+import com.example.mynewsapplicationproject.ui.instantsearch.InstantSearchActivity
 import com.example.mynewsapplicationproject.ui.languages.LanguagesActivity
 import com.example.mynewsapplicationproject.ui.newsbycountry.NewsByCountryActivity
 import com.example.mynewsapplicationproject.ui.newsbylanguage.NewsByLanguageActivity
@@ -25,5 +26,7 @@ interface ActivityComponent {
     fun inject(activity: LanguagesActivity)
 
     fun inject(activity: NewsByLanguageActivity)
+
+    fun inject(activity: InstantSearchActivity)
 
 }

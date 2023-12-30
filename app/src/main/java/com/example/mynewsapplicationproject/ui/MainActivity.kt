@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.mynewsapplicationproject.data.model.ContentToSee
 import com.example.mynewsapplicationproject.databinding.ActivityMainBinding
 import com.example.mynewsapplicationproject.ui.countries.CountriesPageActivity
+import com.example.mynewsapplicationproject.ui.instantsearch.InstantSearchActivity
 import com.example.mynewsapplicationproject.ui.languages.LanguagesActivity
 import com.example.mynewsapplicationproject.ui.newssources.NewsSourceActivity
 import com.example.mynewsapplicationproject.ui.topheadline.TopHeadlineActivity
@@ -55,6 +56,10 @@ class MainActivity: AppCompatActivity() {
             }
             else if (position == 3){
                 val intent = Intent(this, LanguagesActivity::class.java)
+                startActivity(intent)
+            }
+            else {
+                val intent = Intent(this, InstantSearchActivity::class.java)
                 startActivity(intent)
             }
 

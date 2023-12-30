@@ -8,6 +8,7 @@ import com.example.mynewsapplicationproject.data.repository.TopHeadlineRepositor
 import com.example.mynewsapplicationproject.di.ActivityContext
 import com.example.mynewsapplicationproject.ui.base.ViewModelProviderFactory
 import com.example.mynewsapplicationproject.ui.countries.CountriesPageAdapter
+import com.example.mynewsapplicationproject.ui.instantsearch.InstantSearchViewModel
 import com.example.mynewsapplicationproject.ui.languages.LanguagesAdapter
 import com.example.mynewsapplicationproject.ui.newsbycountry.NewsByCountryViewModel
 import com.example.mynewsapplicationproject.ui.newsbylanguage.NewsByLanguageViewModel
@@ -60,6 +61,14 @@ class ActivityModule(private val activity: AppCompatActivity) {
             ViewModelProviderFactory(NewsByLanguageViewModel::class) {
                 NewsByLanguageViewModel(topHeadlineRepository)
             })[NewsByLanguageViewModel::class.java]
+    }
+
+    @Provides
+    fun provideInstantSearchViewModel(topHeadlineRepository: TopHeadlineRepository): InstantSearchViewModel {
+        return ViewModelProvider(activity,
+            ViewModelProviderFactory(InstantSearchViewModel::class) {
+                InstantSearchViewModel(topHeadlineRepository)
+            })[InstantSearchViewModel::class.java]
     }
 
     @Provides
