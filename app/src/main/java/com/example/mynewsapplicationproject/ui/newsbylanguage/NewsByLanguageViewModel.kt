@@ -3,14 +3,19 @@ package com.example.mynewsapplicationproject.ui.newsbylanguage
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.mynewsapplicationproject.data.model.Article
+import com.example.mynewsapplicationproject.data.repository.NewsSourcesRepository
 import com.example.mynewsapplicationproject.data.repository.TopHeadlineRepository
 import com.example.mynewsapplicationproject.ui.base.UiState
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class NewsByLanguageViewModel (private val topHeadlineRepository: TopHeadlineRepository) : ViewModel() {
+@HiltViewModel
+class NewsByLanguageViewModel @Inject constructor(private val topHeadlineRepository: TopHeadlineRepository) :
+    ViewModel() {
 
     private val _uiState = MutableStateFlow<UiState<List<Article>>>(UiState.Loading)
 

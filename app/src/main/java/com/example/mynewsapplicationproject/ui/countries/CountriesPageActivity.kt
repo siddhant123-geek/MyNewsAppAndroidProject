@@ -4,13 +4,12 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.mynewsapplicationproject.NewsApplication
 import com.example.mynewsapplicationproject.data.model.Country
 import com.example.mynewsapplicationproject.databinding.ActivityCountriesPageBinding
-import com.example.mynewsapplicationproject.di.component.DaggerActivityComponent
-import com.example.mynewsapplicationproject.di.module.ActivityModule
+import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
+@AndroidEntryPoint
 class CountriesPageActivity: AppCompatActivity() {
 
     companion object {
@@ -40,7 +39,7 @@ class CountriesPageActivity: AppCompatActivity() {
     private lateinit var countriesTexts: ArrayList<Country>
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        injectDependencies()
+//        injectDependencies()
         super.onCreate(savedInstanceState)
         binding = ActivityCountriesPageBinding.inflate(layoutInflater)
         setContentView(binding.root)
@@ -60,11 +59,5 @@ class CountriesPageActivity: AppCompatActivity() {
         adapter = CountriesPageAdapter(countriesTexts)
         recyclerView.adapter = adapter
         adapter.notifyDataSetChanged()
-    }
-
-    private fun injectDependencies() {
-        DaggerActivityComponent.builder()
-            .applicationComponent((application as NewsApplication).applicationComponent)
-            .activityModule(ActivityModule(this)).build().inject(this)
     }
 }

@@ -6,23 +6,22 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
 import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.mynewsapplicationproject.NewsApplication
 import com.example.mynewsapplicationproject.data.model.Article
 import com.example.mynewsapplicationproject.databinding.ActivityInstantSearchBinding
-import com.example.mynewsapplicationproject.di.component.DaggerActivityComponent
-import com.example.mynewsapplicationproject.di.module.ActivityModule
 import com.example.mynewsapplicationproject.ui.base.UiState
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-class InstantSearchActivity: AppCompatActivity() {
+@AndroidEntryPoint
+class InstantSearchActivity : AppCompatActivity() {
 
-    @Inject
-    lateinit var instantSearchViewModel: InstantSearchViewModel
+    private lateinit var instantSearchViewModel: InstantSearchViewModel
 
     @Inject
     lateinit var adapter: InstantSearchAdapter
@@ -31,12 +30,16 @@ class InstantSearchActivity: AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        injectDependencies()
+//        injectDependencies()
         binding = ActivityInstantSearchBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
+        setupViewModel()
         setupUI()
         setupObserver()
+    }
+
+    private fun setupViewModel() {
+        instantSearchViewModel = ViewModelProvider(this)[InstantSearchViewModel::class.java]
     }
 
     private fun setupObserver() {
@@ -58,7 +61,11 @@ class InstantSearchActivity: AppCompatActivity() {
                         is UiState.Error -> {
                             binding.instantSearchProgressBar.visibility = View.GONE
                             binding.instantSearchRecyclerView.visibility = View.GONE
-                            Toast.makeText(this@InstantSearchActivity, it.message, Toast.LENGTH_LONG)
+                            Toast.makeText(
+                                this@InstantSearchActivity,
+                                it.message,
+                                Toast.LENGTH_LONG
+                            )
                                 .show()
                         }
                     }
@@ -93,11 +100,5 @@ class InstantSearchActivity: AppCompatActivity() {
     private fun renderList(articleList: List<Article>) {
         adapter.addData(articleList)
         adapter.notifyDataSetChanged()
-    }
-
-    private fun injectDependencies() {
-        DaggerActivityComponent.builder()
-            .applicationComponent((application as NewsApplication).applicationComponent)
-            .activityModule(ActivityModule(this)).build().inject(this)
     }
 }

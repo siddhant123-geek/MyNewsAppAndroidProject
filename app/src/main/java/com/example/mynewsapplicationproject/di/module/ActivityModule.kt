@@ -1,86 +1,36 @@
 package com.example.mynewsapplicationproject.di.module
 
-import android.content.Context
-import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.ViewModelProvider
-import com.example.mynewsapplicationproject.data.repository.NewsSourcesRepository
-import com.example.mynewsapplicationproject.data.repository.TopHeadlineRepository
-import com.example.mynewsapplicationproject.di.ActivityContext
-import com.example.mynewsapplicationproject.ui.base.ViewModelProviderFactory
 import com.example.mynewsapplicationproject.ui.countries.CountriesPageAdapter
 import com.example.mynewsapplicationproject.ui.instantsearch.InstantSearchAdapter
-import com.example.mynewsapplicationproject.ui.instantsearch.InstantSearchViewModel
 import com.example.mynewsapplicationproject.ui.languages.LanguagesAdapter
-import com.example.mynewsapplicationproject.ui.newsbycountry.NewsByCountryViewModel
-import com.example.mynewsapplicationproject.ui.newsbylanguage.NewsByLanguageViewModel
 import com.example.mynewsapplicationproject.ui.newssources.NewsSourceAdapter
-import com.example.mynewsapplicationproject.ui.newssources.NewsSourceViewModel
 import com.example.mynewsapplicationproject.ui.topheadline.TopHeadlineAdapter
-import com.example.mynewsapplicationproject.ui.topheadline.TopHeadlineViewModel
 import dagger.Module
 import dagger.Provides
+import dagger.hilt.InstallIn
+import dagger.hilt.android.components.ActivityComponent
+import dagger.hilt.android.scopes.ActivityScoped
 
 @Module
-class ActivityModule(private val activity: AppCompatActivity) {
-
-    @ActivityContext
-    @Provides
-    fun provideContext(): Context {
-        return activity
-    }
-
-    @Provides
-    fun provideNewsListViewModel(topHeadlineRepository: TopHeadlineRepository): TopHeadlineViewModel {
-        return ViewModelProvider(activity,
-            ViewModelProviderFactory(TopHeadlineViewModel::class) {
-                TopHeadlineViewModel(topHeadlineRepository)
-            })[TopHeadlineViewModel::class.java]
-    }
-
+@InstallIn(ActivityComponent::class)
+class ActivityModule {
+    @ActivityScoped
     @Provides
     fun provideTopHeadlineAdapter() = TopHeadlineAdapter(ArrayList())
 
+    @ActivityScoped
     @Provides
     fun provideInstantSearchAdapter() = InstantSearchAdapter(ArrayList())
 
-    @Provides
-    fun provideNewsSourcesViewModel(newsSourcesRepository: NewsSourcesRepository): NewsSourceViewModel {
-        return ViewModelProvider(activity,
-            ViewModelProviderFactory(NewsSourceViewModel::class) {
-                NewsSourceViewModel(newsSourcesRepository)
-            })[NewsSourceViewModel::class.java]
-    }
-
-    @Provides
-    fun provideNewsByCountryViewModel(topHeadlineRepository: TopHeadlineRepository): NewsByCountryViewModel {
-        return ViewModelProvider(activity,
-            ViewModelProviderFactory(NewsByCountryViewModel::class) {
-                NewsByCountryViewModel(topHeadlineRepository)
-            })[NewsByCountryViewModel::class.java]
-    }
-
-    @Provides
-    fun provideNewsByLanguageViewModel(topHeadlineRepository: TopHeadlineRepository): NewsByLanguageViewModel {
-        return ViewModelProvider(activity,
-            ViewModelProviderFactory(NewsByLanguageViewModel::class) {
-                NewsByLanguageViewModel(topHeadlineRepository)
-            })[NewsByLanguageViewModel::class.java]
-    }
-
-    @Provides
-    fun provideInstantSearchViewModel(topHeadlineRepository: TopHeadlineRepository): InstantSearchViewModel {
-        return ViewModelProvider(activity,
-            ViewModelProviderFactory(InstantSearchViewModel::class) {
-                InstantSearchViewModel(topHeadlineRepository)
-            })[InstantSearchViewModel::class.java]
-    }
-
+    @ActivityScoped
     @Provides
     fun provideNewsSourcesAdapter() = NewsSourceAdapter(ArrayList())
 
+    @ActivityScoped
     @Provides
     fun provideCountriesPageAdapter() = CountriesPageAdapter(ArrayList())
 
+    @ActivityScoped
     @Provides
     fun provideLanguagesPageAdapter() = LanguagesAdapter(ArrayList())
 

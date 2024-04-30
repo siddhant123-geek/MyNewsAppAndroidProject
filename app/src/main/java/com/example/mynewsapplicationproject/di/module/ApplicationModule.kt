@@ -1,24 +1,19 @@
 package com.example.mynewsapplicationproject.di.module
 
-import android.content.Context
 import com.example.mynewsapplicationproject.NewsApplication
 import com.example.mynewsapplicationproject.data.api.NetworkService
-import com.example.mynewsapplicationproject.di.ApplicationContext
 import com.example.mynewsapplicationproject.di.BaseUrl
 import dagger.Module
 import dagger.Provides
+import dagger.hilt.InstallIn
+import dagger.hilt.components.SingletonComponent
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import javax.inject.Singleton
 
+@InstallIn(SingletonComponent::class)
 @Module
-class ApplicationModule(private val application: NewsApplication) {
-
-    @ApplicationContext
-    @Provides
-    fun provideContext(): Context {
-        return application
-    }
+class ApplicationModule {
 
     @BaseUrl
     @Provides
