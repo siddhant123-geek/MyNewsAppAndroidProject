@@ -7,4 +7,12 @@ object AppConstant {
     const val ISO_CODE_KEY = "isoCode"
     const val DEBOUNCE_TIMEOUT = 300L
     const val MIN_SEARCH_CHAR = 3
+    const val APP_NAME = "MyNewsApplicationProject"
+    const val TOP_HEADLINES = "Top Headlines"
+    const val SOURCES = "News Sources"
+    const val COUNTRIES = "Countries"
+    const val NEWSBYCOUNTRY = "News By Country"
+    const val NEWSBYLANGUAGE = "News By Language"
+    const val LANGUAGES = "Languages"
+    const val SEARCH = "Instant Search"
 }
