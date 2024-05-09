@@ -13,7 +13,8 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.example.mynewsapplicationproject.R
-import com.example.mynewsapplicationproject.data.model.Article
+import com.example.mynewsapplicationproject.data.local.entity.Article
+import com.example.mynewsapplicationproject.data.model.ApiArticle
 import com.example.mynewsapplicationproject.ui.base.ShowError
 import com.example.mynewsapplicationproject.ui.base.ShowLoading
 import com.example.mynewsapplicationproject.ui.base.UiState

@@ -1,8 +1,9 @@
 package com.example.mynewsapplicationproject.data.model
 
+import com.example.mynewsapplicationproject.data.local.entity.Article
 import com.google.gson.annotations.SerializedName
 
-data class Article (
+data class ApiArticle (
     @SerializedName("title")
     val title: String = "",
     @SerializedName("description")
@@ -12,5 +13,15 @@ data class Article (
     @SerializedName("urlToImage")
     val imageUrl: String = "",
     @SerializedName("source")
-    val source: Source
+    val source: ApiSource
 )
+
+fun ApiArticle.toArticleEntity(): Article {
+    return Article(
+        title = title,
+        description = description,
+        url = url,
+        imageUrl = imageUrl,
+        source = source.toSourceEntity()
+    )
+}

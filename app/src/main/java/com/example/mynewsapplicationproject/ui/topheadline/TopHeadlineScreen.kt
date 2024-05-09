@@ -11,8 +11,6 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
-import androidx.compose.material3.TopAppBar
-import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
@@ -22,12 +20,13 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import coil.compose.AsyncImage
-import com.example.mynewsapplicationproject.data.model.Article
-import com.example.mynewsapplicationproject.data.model.Source
+import com.example.mynewsapplicationproject.data.local.entity.Article
+import com.example.mynewsapplicationproject.data.local.entity.Source
+import com.example.mynewsapplicationproject.data.model.ApiArticle
+import com.example.mynewsapplicationproject.data.model.ApiSource
 import com.example.mynewsapplicationproject.ui.base.ShowError
 import com.example.mynewsapplicationproject.ui.base.ShowLoading
 import com.example.mynewsapplicationproject.ui.base.UiState
-import com.example.mynewsapplicationproject.utils.AppConstant
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -65,7 +64,7 @@ fun TopHeadlineScreen(uiState: UiState<List<Article>>, onNewsClick: (url: String
 @Composable
 fun ArticleList(articles: List<Article>, onNewsClick: (url: String) -> Unit) {
     LazyColumn {
-        items(articles, key = { article -> article.url }) { article ->
+        items(articles, key = { article -> article.id }) { article ->
             Article(article, onNewsClick)
         }
     }
@@ -76,7 +75,7 @@ fun Article(article: Article, onNewsClick: (url: String) -> Unit) {
     Column(modifier = Modifier
         .fillMaxWidth()
         .clickable {
-            if (article.url.isNotEmpty()) {
+            if (!article.url.isNullOrEmpty()) {
                 onNewsClick(article.url)
             }
         }) {

@@ -18,6 +18,8 @@ import com.example.mynewsapplicationproject.ui.newsbylanguage.NewsByLanguageRout
 import com.example.mynewsapplicationproject.ui.newsbycountry.NewsByCountryRoute
 import com.example.mynewsapplicationproject.ui.newssources.NewsSourceRoute
 import com.example.mynewsapplicationproject.ui.topheadline.TopHeadlineRoute
+import com.example.mynewsapplicationproject.utils.DefaultNetworkHelper
+import com.example.mynewsapplicationproject.utils.NetworkHelper
 
 open class Route(val name: String) {
     object Home: Route("home")
@@ -32,9 +34,9 @@ open class Route(val name: String) {
 
 @Composable
 fun NewsNavHost() {
-
     val navController = rememberNavController()
     val context = LocalContext.current
+    val netWorkHelper = DefaultNetworkHelper(context)
 
     NavHost(
         navController = navController,
@@ -69,7 +71,8 @@ fun NewsNavHost() {
             val country = it.arguments?.getString("country")
             Log.d("###", "NewsNavHost: country " + country)
             NewsByCountryRoute(onNewsClick = { openCustomChromeTab(context, it) },
-                country = country!!)
+                                               country = country!!,
+                                               netWorkHelper = netWorkHelper)
         }
 
         //Languages
@@ -86,7 +89,9 @@ fun NewsNavHost() {
             val language = it.arguments?.getString("language")
             Log.d("###", "NewsNavHost: language " + language)
             NewsByLanguageRoute(onNewsClick = { openCustomChromeTab(context, it) },
-                language = language!!)
+                                language = language!!,
+                                netWorkHelper = netWorkHelper
+            )
         }
         composable(route = Route.Search.name) {
             InstantSearchRoute(onNewsClick = {openCustomChromeTab(context, it)})
