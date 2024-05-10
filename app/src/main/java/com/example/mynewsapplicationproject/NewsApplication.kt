@@ -1,6 +1,7 @@
 package com.example.mynewsapplicationproject
 
 import android.app.Application
+import androidx.work.BackoffPolicy
 import androidx.work.Constraints
 import androidx.work.ExistingPeriodicWorkPolicy
 import androidx.work.NetworkType
@@ -23,12 +24,18 @@ class NewsApplication : Application() {
             .setRequiredNetworkType(NetworkType.CONNECTED)
             .build()
 
+        // Create a retry policy with exponential backoff
+        val retryPolicy = BackoffPolicy.EXPONENTIAL
+        val retryInterval = 15L // Retry every 15 minutes
+        val retryIntervalTimeUnit = TimeUnit.MINUTES
+
         val fetchNewsRequest = PeriodicWorkRequestBuilder<MyNewsFetchWork>(
             repeatInterval = 1,
             repeatIntervalTimeUnit = TimeUnit.DAYS
         )
             .setConstraints(constraints)
             .setInitialDelay(calculateInitialDelay(), TimeUnit.MILLISECONDS)
+            .setBackoffCriteria(retryPolicy, retryInterval, retryIntervalTimeUnit)
             .addTag(MyNewsFetchWork.WORK_MANAGER_TAG)
             .build()
         WorkManager
