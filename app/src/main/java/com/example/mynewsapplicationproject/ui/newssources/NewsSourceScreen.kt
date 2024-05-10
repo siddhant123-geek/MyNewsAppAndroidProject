@@ -31,6 +31,7 @@ import com.example.mynewsapplicationproject.ui.base.ShowError
 import com.example.mynewsapplicationproject.ui.base.ShowLoading
 import com.example.mynewsapplicationproject.ui.base.UiState
 import com.example.mynewsapplicationproject.utils.AppConstant.SOURCES
+import org.tinylog.Logger
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -52,15 +53,18 @@ fun NewsSourceRoute(
 fun NewsSourceScreen(uiState: UiState<List<Source>>, onNewsClick: (url: String) -> Unit) {
     when (uiState) {
         is UiState.Success -> {
+            Logger.debug("coming inside the success inside news sources Ui state", null)
             SourceHeading()
             SourceList(uiState.data, onNewsClick)
         }
 
         is UiState.Error -> {
+            Logger.error("Coming inside error in news sources with error message as - ${uiState.message}", null)
             ShowError(uiState.message)
         }
 
         else -> {
+            Logger.debug("Coming inside loading in news sources", null)
             ShowLoading()
         }
     }
