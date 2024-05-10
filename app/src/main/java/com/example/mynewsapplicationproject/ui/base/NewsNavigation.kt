@@ -24,6 +24,7 @@ import com.example.mynewsapplicationproject.utils.NetworkHelper
 open class Route(val name: String) {
     object Home: Route("home")
     object TopHeadline : Route("topheadline")
+    object TopHeadlineWithPaging : Route("topheadlinewithpaging")
     object NewsSource : Route("newssource")
     object Countries : Route("countries")
     object NewsByCountry : Route("{country}/newsbycountry")
@@ -47,6 +48,11 @@ fun NewsNavHost() {
             HomeScreenRoute(onItemClick = { navigateTo(it, navController) } )
         }
         composable(route = Route.TopHeadline.name) {
+            TopHeadlineRoute(onNewsClick = {
+                openCustomChromeTab(context, it)
+            })
+        }
+        composable(route = Route.TopHeadlineWithPaging.name) {
             TopHeadlineRoute(onNewsClick = {
                 openCustomChromeTab(context, it)
             })

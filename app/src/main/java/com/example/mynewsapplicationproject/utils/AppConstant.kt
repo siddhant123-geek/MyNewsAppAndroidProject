@@ -15,4 +15,7 @@ object AppConstant {
     const val NEWSBYLANGUAGE = "News By Language"
     const val LANGUAGES = "Languages"
     const val SEARCH = "Instant Search"
+    const val TOP_HEADLINES_WITH_PAGING = "TopHeadlines With Paging"
+    const val PAGE_SIZE = 10
+    const val INITIAL_PAGE = 1
 }
